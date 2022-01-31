@@ -22,11 +22,12 @@ public class MoviesTest {
     public void assertThatPulpFictionMovieRuntimeStoredCorrectly(){
         String expectedPulpFictionMovieRuntime="154 min";
         String pulpFictionMovieName = "Pulp Fiction";
-        List<Movie> moviesMatchesPulpFiction = new MoviesApis().searchMoviesByName("Pulp Fiction");
-        Movie pulpFiction =  moviesMatchesPulpFiction.stream().filter(e -> e.getTitle().equals(pulpFictionMovieName)).collect(Collectors.toList()).get(0);
-        Movie apiResponseMovie = new MoviesApis().getMovieByID(pulpFiction.getImdbID());
-        assertEquals(expectedPulpFictionMovieRuntime,apiResponseMovie.getRuntime());
+        List<Movie> moviesMatchesPulpFictionName = new MoviesApis().searchMoviesByName(pulpFictionMovieName);
+        Movie pulpFiction =  moviesMatchesPulpFictionName.stream().filter(e -> e.getTitle().equals(pulpFictionMovieName)).collect(Collectors.toList()).get(0);
+        Movie movieRetrievedFromApiResponse = new MoviesApis().getMovieByID(pulpFiction.getImdbID());
+        assertEquals(expectedPulpFictionMovieRuntime,movieRetrievedFromApiResponse.getRuntime());
     }
+
     @Test
     public void testGetMovieByIDAndAssertOnItAsObject() {
         String movieId = "tt4154796";

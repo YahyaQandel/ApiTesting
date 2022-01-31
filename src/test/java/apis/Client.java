@@ -7,9 +7,15 @@ import io.restassured.response.ExtractableResponse;
 import static io.restassured.RestAssured.given;
 
 public class Client {
-    private final static String API_URL = "https://movie-database-imdb-alternative.p.rapidapi.com/";
-    private final static String API_HOST = "movie-database-imdb-alternative.p.rapidapi.com";
-    private final static String API_KEY = "21e6f4f25dmsh8bbed3c079a43acp14bd7bjsnb34a3bcca5f8";
+    private String API_URL ;
+    private String API_HOST;
+    private String API_KEY ;
+
+    public Client(String API_URL,String API_HOST,String API_KEY){
+        this.API_URL = API_URL;
+        this.API_HOST = API_HOST;
+        this.API_KEY = API_KEY;
+    }
 
     private ExtractableResponse<?> request(String urlParams){
         return given()
