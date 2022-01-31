@@ -30,7 +30,7 @@ public class Movies {
                 .extract().response();
         List<HashMap<String,String>> movies = response.getBody().jsonPath().getList("Search");
         HashMap<String,String> firstMovie = movies.get(0);
-        assertEquals(firstMovie.get("Title"), "The Avengers");
+        assertTrue(firstMovie.get("Title").contains(movieName));
     }
 
     @Test
@@ -49,6 +49,6 @@ public class Movies {
                 .then()
                 .statusCode(200)
                 .extract().as(Movie.class);
-        assertTrue(testMovie.equals(retrievedMovie));
+        assertEquals(testMovie, retrievedMovie);
     }
 }
