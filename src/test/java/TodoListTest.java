@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 import static io.restassured.RestAssured.given;
 
-public class TodoList {
+public class TodoListTest {
 
     private String API_URL = "https://jsonplaceholder.typicode.com/todos/";
 
