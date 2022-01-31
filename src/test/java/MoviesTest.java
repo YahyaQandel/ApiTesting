@@ -1,13 +1,9 @@
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import movie.Movie;
 import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MoviesTest {
@@ -34,21 +30,12 @@ public class MoviesTest {
     }
 
     @Test
-    public void testGetMovieByIDAndAssertOnItAsObject() {
-        String movieId = "tt4154796";
-        Movie testMovie = new Movie();
-        testMovie.setTitle("Avengers: Endgame");
-        testMovie.setType("movie");
-        testMovie.setYear("2019");
-        Movie retrievedMovie = given()
-                .contentType(ContentType.JSON)
-                .header("X-RapidAPI-Host", this.API_HOST)
-                .header("X-RapidAPI-Key", this.API_KEY)
-                .when()
-                .get(String.format("%s?r=json&i=%s",API_URL,movieId))
-                .then()
-                .statusCode(200)
-                .extract().as(Movie.class);
-        assertEquals(testMovie, retrievedMovie);
+    public void assertThatPulpFictionMovieRuntimeStoredCorrectly(){
+        String expectedPulpFictionMovieRuntime="154 min";
+        String pulpFictionMovieName = "Pulp Fiction";
+       // assert that pulp fiction movie stored has runtime 154 min
+       /*
+       @Url: https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=tt4154796
+        */
     }
 }
