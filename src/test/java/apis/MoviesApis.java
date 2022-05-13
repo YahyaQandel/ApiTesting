@@ -8,9 +8,9 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 public class MoviesApis {
-    private final static String API_URL = "https://movie-database-imdb-alternative.p.rapidapi.com/";
-    private final static String API_HOST = "movie-database-imdb-alternative.p.rapidapi.com";
-    private final static String API_KEY = "21e6f4f25dmsh8bbed3c079a43acp14bd7bjsnb34a3bcca5f8";
+    private final static String API_URL = "https://movie-database-alternative.p.rapidapi.com/";
+    private final static String API_HOST = "movie-database-alternative.p.rapidapi.com";
+    private final static String API_KEY = "d7729c4c68msh79e456503085291p10ed60jsn3190a78995a9";
     Client apiClient;
     /**
      @param String movie name
