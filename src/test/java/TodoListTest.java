@@ -12,7 +12,7 @@ public class TodoListTest {
     private String API_URL = "https://jsonplaceholder.typicode.com/todos/";
 
     @Test
-    public void firstTest(){
+    public void assertThatListFirstTaskHasTitle(){
         String endPointURL = String.format("%s%s",this.API_URL,"1");
         Response todoResponse = given()
                 .contentType(ContentType.JSON)
