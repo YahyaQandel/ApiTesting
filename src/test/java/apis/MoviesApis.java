@@ -30,12 +30,12 @@ public class MoviesApis {
 
     private List<Movie> mapArrayListToMovieList(List<HashMap<String,String>> apiMovieList){
         List<Movie> movies = new ArrayList<>(); ;
-        for (HashMap<String, String> apiMovies : apiMovieList) {
+        for (HashMap<String, String> apiMovie : apiMovieList) {
             Movie movie = new Movie();
-            movie.setYear(apiMovies.get("Year"));
-            movie.setType(apiMovies.get("Type"));
-            movie.setTitle(apiMovies.get("Title"));
-            movie.setImdbID(apiMovies.get("imdbID"));
+            movie.setYear(apiMovie.get("Year"));
+            movie.setType(apiMovie.get("Type"));
+            movie.setTitle(apiMovie.get("Title"));
+            movie.setImdbID(apiMovie.get("imdbID"));
             movies.add(movie);
         }
         return movies;

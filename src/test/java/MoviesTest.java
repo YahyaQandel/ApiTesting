@@ -1,5 +1,6 @@
 import apis.MoviesApis;
 import movie.Movie;
+import movie.MovieController;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,16 +20,6 @@ public class MoviesTest {
     }
 
     @Test
-    public void assertThatPulpFictionMovieRuntimeStoredCorrectly(){
-        String expectedPulpFictionMovieRuntime="154 min";
-        String pulpFictionMovieName = "Pulp Fiction";
-        List<Movie> moviesMatchesPulpFictionName = new MoviesApis().searchMoviesByName(pulpFictionMovieName);
-        Movie pulpFiction =  moviesMatchesPulpFictionName.stream().filter(e -> e.getTitle().equals(pulpFictionMovieName)).collect(Collectors.toList()).get(0);
-        Movie movieRetrievedFromApiResponse = new MoviesApis().getMovieByID(pulpFiction.getImdbID());
-        assertEquals(expectedPulpFictionMovieRuntime,movieRetrievedFromApiResponse.getRuntime());
-    }
-
-    @Test
     public void testGetMovieByIDAndAssertOnItAsObject() {
         String movieId = "tt4154796";
         Movie testMovie = new Movie();
@@ -38,4 +29,15 @@ public class MoviesTest {
         Movie retrievedMovie = new MoviesApis().getMovieByID(movieId);
         assertEquals(testMovie, retrievedMovie);
     }
+
+    @Test
+    public void assertThatPulpFictionMovieRuntimeStoredCorrectly(){
+        String expectedPulpFictionMovieRuntime="154 min";
+        String pulpFictionMovieName = "Pulp Fiction";
+        List<Movie> moviesMatchesPulpFictionName = new MoviesApis().searchMoviesByName(pulpFictionMovieName);
+        Movie pulpFiction = MovieController.getMovieFromMoviesList(moviesMatchesPulpFictionName,pulpFictionMovieName);
+        Movie movieRetrievedFromApiResponse = new MoviesApis().getMovieByID(pulpFiction.getImdbID());
+        assertEquals(expectedPulpFictionMovieRuntime,movieRetrievedFromApiResponse.getRuntime());
+    }
+
 }
