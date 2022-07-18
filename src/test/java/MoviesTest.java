@@ -36,7 +36,7 @@ public class MoviesTest {
        // assert that pulp fiction movie stored has runtime 154 min
        /*
        sample api request by movie id to get movie details
-       @Url: https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=tt4154796
+       @Url:  https://movie-database-alternative.p.rapidapi.com/?r=json&i=tt4154796
         */
     }
 }
