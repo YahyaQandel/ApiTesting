@@ -3,8 +3,6 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-
-
 import static io.restassured.RestAssured.given;
 
 public class TodoListTest {

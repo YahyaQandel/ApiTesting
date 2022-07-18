@@ -19,25 +19,15 @@ public class MoviesApis {
     public MoviesApis(){
      apiClient  = new Client(API_URL,API_HOST,API_KEY);
     }
-    public List<Movie> searchMoviesByName(String movieName){
-        List<HashMap<String,String>> apiResponseMovies = apiClient.getJsonResponse(String.format("?s=%s",movieName)).getList("Search");
-        return mapArrayListToMovieList(apiResponseMovies);
+    public List<HashMap<String,String>> searchMoviesByName(String movieName){
+        return apiClient.getJsonResponse(String.format("?s=%s",movieName)).getList("Search");
     }
-
+    /**
+     @param String movie id
+     @return movie details object
+     */
     public Movie getMovieByID(String movieID){
         return apiClient.getResponse(String.format("?r=json&i=%s",movieID)).as(Movie.class);
     }
 
-    private List<Movie> mapArrayListToMovieList(List<HashMap<String,String>> apiMovieList){
-        List<Movie> movies = new ArrayList<>(); ;
-        for (HashMap<String, String> apiMovie : apiMovieList) {
-            Movie movie = new Movie();
-            movie.setYear(apiMovie.get("Year"));
-            movie.setType(apiMovie.get("Type"));
-            movie.setTitle(apiMovie.get("Title"));
-            movie.setImdbID(apiMovie.get("imdbID"));
-            movies.add(movie);
-        }
-        return movies;
-    }
 }

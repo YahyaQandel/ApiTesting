@@ -3,6 +3,7 @@ import movie.Movie;
 import movie.MovieController;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,9 +14,9 @@ import static org.junit.Assert.assertTrue;
 public class MoviesTest {
 
     @Test
-    public void assertThatSearchApiReturnsMatchingResults() {
+    public void assertThatSearchApiReturnsMatchingResults()  throws IOException {
         String movieName = "Avengers";
-        Movie firstMovie = new MoviesApis().searchMoviesByName(movieName).get(0);
+        Movie firstMovie =  MovieController.mapArrayListToMovieList(new MoviesApis().searchMoviesByName(movieName)).get(0);
         assertTrue(firstMovie.getTitle().contains(movieName));
     }
 
@@ -31,10 +32,10 @@ public class MoviesTest {
     }
 
     @Test
-    public void assertThatPulpFictionMovieRuntimeStoredCorrectly(){
+    public void assertThatPulpFictionMovieRuntimeStoredCorrectly() throws IOException {
         String expectedPulpFictionMovieRuntime="154 min";
         String pulpFictionMovieName = "Pulp Fiction";
-        List<Movie> moviesMatchesPulpFictionName = new MoviesApis().searchMoviesByName(pulpFictionMovieName);
+        List<Movie> moviesMatchesPulpFictionName = MovieController.mapArrayListToMovieList(new MoviesApis().searchMoviesByName(pulpFictionMovieName));
         Movie pulpFiction = MovieController.getMovieFromMoviesList(moviesMatchesPulpFictionName,pulpFictionMovieName);
         Movie movieRetrievedFromApiResponse = new MoviesApis().getMovieByID(pulpFiction.getImdbID());
         assertEquals(expectedPulpFictionMovieRuntime,movieRetrievedFromApiResponse.getRuntime());
