@@ -16,7 +16,7 @@ public class MovieController {
     }
 
     public static List<Movie> mapArrayListToMovieList(List<HashMap<String,String>> apiMovieList)  throws IOException {
-        List<Movie> movies = new ArrayList<>(); ;
+        List<Movie> movies = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         for (HashMap<String, String> apiMovie : apiMovieList) {
             Movie movie = mapper.readValue(new ObjectMapper().writeValueAsString(apiMovie), Movie.class);

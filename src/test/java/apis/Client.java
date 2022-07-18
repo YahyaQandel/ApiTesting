@@ -17,8 +17,8 @@ public class Client {
         this.API_KEY = API_KEY;
     }
 
-    private ExtractableResponse<?> request(String urlParams){
-        return given()
+    private ExtractableResponse request(String urlParams){
+        return (ExtractableResponse) given()
                 .contentType(ContentType.JSON)
                 .header("X-RapidAPI-Host", API_HOST)
                 .header("X-RapidAPI-Key", API_KEY)
@@ -26,7 +26,7 @@ public class Client {
                 .get(String.format("%s%s",API_URL,urlParams))
                 .then()
                 .statusCode(200)
-                .extract();
+                .extract().response();
     }
 
     public JsonPath getJsonResponse(String urlParam){
