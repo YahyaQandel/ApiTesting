@@ -1,27 +1,28 @@
 package apis;
 
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.ExtractableResponse;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
 public class Client {
     private String API_URL ;
-    private String API_HOST;
-    private String API_KEY ;
-
-    public Client(String API_URL,String API_HOST,String API_KEY){
+    public Client(String API_URL){
         this.API_URL = API_URL;
-        this.API_HOST = API_HOST;
-        this.API_KEY = API_KEY;
     }
 
-    private ExtractableResponse request(String urlParams){
+    private ExtractableResponse request(String urlParams,HashMap<String,String> ...headersMap){
+        HashMap<String,String> requestHeader = new HashMap<>();
+        if (headersMap.length > 0){
+            requestHeader = headersMap[0];
+        }
         return (ExtractableResponse) given()
                 .contentType(ContentType.JSON)
-                .header("X-RapidAPI-Host", API_HOST)
-                .header("X-RapidAPI-Key", API_KEY)
+                .headers(requestHeader)
                 .when()
                 .get(String.format("%s%s",API_URL,urlParams))
                 .then()
@@ -29,12 +30,14 @@ public class Client {
                 .extract().response();
     }
 
-    public JsonPath getJsonResponse(String urlParam){
-        return this.request(urlParam).response().getBody().jsonPath();
+    @SafeVarargs
+    public final JsonPath getJsonResponse(String urlParam, HashMap<String, String>... requestHeaders){
+        return this.request(urlParam,requestHeaders).response().getBody().jsonPath();
     }
 
-    public ExtractableResponse<?> getResponse(String urlParam){
-        return this.request(urlParam);
+    @SafeVarargs
+    public final ExtractableResponse<?> getResponse(String urlParam, HashMap<String, String>... requestHeaders){
+        return this.request(urlParam,requestHeaders);
     }
 
 }
